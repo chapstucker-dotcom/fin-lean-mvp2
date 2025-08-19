@@ -1,3 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "package.json", "use": "@vercel/next" }
+  ]
+}
 # fin-lean-mvp2
 lean mvpp
 # fin-lean-mvp2
