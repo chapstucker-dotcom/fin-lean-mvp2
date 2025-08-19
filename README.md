@@ -21,3 +21,17 @@ If not already done, push this repo to GitHub (done ✅).
 ### 3. Environment Variables (if needed)
 Create a `.env` file locally or set them in Vercel:
 Add deployment guide to README
+{
+  "name": "fin-lean-mvp2",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
+}
