@@ -41,3 +41,63 @@ Add deployment guide to README
     "react-dom": "18.2.0"
   }
 }
+fin-lean-mvp2/
+├─ package.json
+├─ vercel.json
+└─ pages/
+   ├─ index.js
+   └─ api/
+      └─ chat.js  (optional for AI features)
+{
+  "name": "fin-lean-mvp2",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "openai": "^4.0.0"
+  }
+}
+{
+  "version": 2,
+  "builds": [
+    { "src": "package.json", "use": "@vercel/next" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}
+export default function Home() {
+  return (
+    <div style={{textAlign: 'center', marginTop: '40px'}}>
+      <h1>💸 Findom Lean MVP</h1>
+      <p>Welcome to your AI Financial Dominatrix test platform.</p>
+    </div>
+  );
+}
+import OpenAI from "openai";
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).end();
+
+  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const { messages } = req.body;
+
+  try {
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: messages
+    });
+    res.status(200).json({ reply: completion.choices[0].message.content });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+}
+git add .
+git commit -m "Add minimal Next.js MVP structure"
+git push origin main
